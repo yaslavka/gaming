@@ -1,0 +1,63 @@
+import { useState } from 'react';
+import styles from './SearchSelect.module.scss';
+import Input from "../Input";
+
+export default function SearchSelect({
+  values,
+  placeholder,
+  className,
+  onChange,
+  onInput,
+}) {
+  const [currentValue, setCurrentValue] = useState('');
+console.log(values)
+  const changeCurrentValue = ({ target: { value } }) => {
+    setCurrentValue(value);
+    onInput && onInput(value);
+  };
+
+  const onChangeHandler = ({ label, value }) => {
+    setCurrentValue(label);
+    onChange && onChange(value);
+  };
+
+  return (
+    <div className={`${styles.SearchSelect} ${className}`}>
+      <input
+        className="px-6 h-14 w-full mb-6 text-white border-secondary-80 bg-secondary-100 hover:border-primary transition-all border-2 border-solid  rounded-md w-full focus:outline-none"
+        type="text"
+        value={currentValue}
+        placeholder={placeholder}
+        onChange={changeCurrentValue}
+      />
+      <svg
+        className={styles.searchIcon}
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 20 20"
+      >
+        <path
+          d="M19.878 18.7l-5.81-5.81a7.876 7.876 0 001.765-4.973C15.833 3.55 12.282 0 7.917 0 3.55 0 0 3.551 0 7.917c0 4.365 3.551 7.916 7.917 7.916a7.876 7.876 0 004.973-1.765l5.81 5.81a.417.417 0 00.589 0l.589-.59a.417.417 0 000-.588zM7.917 14.167a6.257 6.257 0 01-6.25-6.25 6.257 6.257 0 016.25-6.25 6.257 6.257 0 016.25 6.25 6.257 6.257 0 01-6.25 6.25z"
+          fill="#fff"
+        />
+      </svg>
+      <div
+        className={`${styles.variants} ${
+          values.length > 0 ? styles.opened : ''
+        }`}
+      >
+        {values.map(({ label, value }, index) => (
+          <div
+            key={index}
+            className={styles.variant}
+            onClick={() => {
+              onChangeHandler({ label, value });
+            }}
+          >
+            {label}
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}

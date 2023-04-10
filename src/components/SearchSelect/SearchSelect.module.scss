@@ -1,0 +1,65 @@
+@import '~bootstrap/scss/functions';
+@import '~bootstrap/scss/variables';
+@import '~bootstrap/scss/mixins';
+
+.SearchSelect {
+    position: relative;
+    width: 95%;
+    height: 59px;
+    display: flex;
+    align-items: center;
+    border-radius: 35px;
+
+    border: 5px solid #5e2aec;
+
+    input {
+        width: 100%;
+        padding-left: 20px;
+        background-color: transparent;
+        color: rgb(255 224 0 / 42%);
+        border: none;
+        font-size: 1.25rem;
+
+        &:focus {
+            outline: none;
+        }
+
+        &::placeholder {
+            opacity: 1;
+        }
+    }
+
+    .searchIcon {
+        position: absolute;
+        top: 50%;
+        right: 17px;
+        transform: translateY(-50%);
+        width: 20px;
+        height: 20px;
+    }
+
+    .variants {
+        width: calc(100% - 50px);
+        position: absolute;
+        top: 100%;
+        left: 50%;
+        transform: translateX(-50%);
+        padding: 10px;
+        background-color: rgb(255 224 0 / 42%);
+        z-index: 4;
+      border: 5px solid #5e2aec;
+        border-radius: 0 0 15px 15px;
+        height: 0;
+        opacity: 0;
+        overflow: hidden;
+        cursor: pointer;
+
+
+        &.opened {
+            height: initial;
+            max-height: 200px;
+            opacity: 1;
+            overflow-y: auto;
+        }
+    }
+}

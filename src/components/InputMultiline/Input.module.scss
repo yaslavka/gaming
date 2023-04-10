@@ -1,0 +1,57 @@
+@import "~bootstrap/scss/functions";
+@import "~bootstrap/scss/variables";
+@import "~bootstrap/scss/mixins";
+
+.Input {
+  position: relative;
+
+  &.invalid {
+    textarea {
+      color: #ff0000;
+      border-bottom-color: #ff0000;
+    }
+  }
+
+  .placeholder {
+    width: 100%;
+    position: absolute;
+    top: 20px;
+    left: 0;
+    font-size: 0.875rem;
+    line-height: 1.29;
+    transition: top 0.15s ease-in-out;
+    background-color: #fddd0d;
+    z-index: 1;
+  }
+
+  textarea {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    color: $white;
+    outline: none;
+    resize: none;
+
+    &::placeholder {
+      opacity: 0;
+    }
+
+    &[type='text'],
+    &[type='email'],
+    &[type='password'],
+    &[type='tel'] {
+      min-height: 142px;
+      padding-top: 16px;
+
+      @include media-breakpoint-up(xl) {
+        padding-top: 22px;
+      }
+
+
+      &:not(:placeholder-shown) ~ .placeholder,
+      &:focus ~ .placeholder {
+        top: 0;
+      }
+    }
+  }
+}
